@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="contador_onibus"
+        android:label="Bus Passenger"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
