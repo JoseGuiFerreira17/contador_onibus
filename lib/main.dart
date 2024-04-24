@@ -16,16 +16,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int count = 0;
+
   void decrement() {
-    print("Saiu");
+    setState(() {
+      count--;
+    });
   }
 
   void increment() {
-    print("Entrou");
+    setState(() {
+      count++;
+    });
   }
+
+  bool get isEmpty => count == 0;
+  bool get isFull => count == 50;
 
   @override
   Widget build(BuildContext context) {
@@ -41,19 +55,19 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text(
-              "Pode entrar!",
-              style: TextStyle(
+            Text(
+              isFull ? "Lotado!" : "Pode entrar!",
+              style: const TextStyle(
                 fontSize: 40,
                 color: Colors.white,
                 fontWeight: FontWeight.w800,
               ),
             ),
-            const Text(
-              "0",
+            Text(
+              count.toString(),
               style: TextStyle(
                 fontSize: 100,
-                color: Colors.white,
+                color: isFull ? Colors.red : Colors.white,
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -61,13 +75,14 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                  onPressed: decrement,
+                  onPressed: isEmpty ? null : decrement,
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.black,
-                    backgroundColor: Colors.white,
+                    backgroundColor:
+                        isEmpty ? Colors.white.withOpacity(0.2) : Colors.white,
                     fixedSize: const Size(120, 120),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(25),
                     ),
                   ),
                   child: const Text(
@@ -81,13 +96,14 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(width: 32), // Add this line
                 TextButton(
-                  onPressed: increment,
+                  onPressed: isFull ? null : increment,
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.black,
-                    backgroundColor: Colors.white,
+                    backgroundColor:
+                        isFull ? Colors.white.withOpacity(0.2) : Colors.white,
                     fixedSize: const Size(120, 120),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(25),
                     ),
                   ),
                   child: const Text(
