@@ -57,9 +57,9 @@ class _HomePageState extends State<HomePage> {
           children: [
             Text(
               isFull ? "Lotado!" : "Pode entrar!",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 40,
-                color: Colors.white,
+                color: isFull ? Colors.redAccent[700] : Colors.white,
                 fontWeight: FontWeight.w800,
               ),
             ),
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
               count.toString(),
               style: TextStyle(
                 fontSize: 100,
-                color: isFull ? Colors.red : Colors.white,
+                color: isFull ? Colors.redAccent[700] : Colors.white,
                 fontWeight: FontWeight.w500,
               ),
             ),
